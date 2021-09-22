@@ -25,3 +25,6 @@ hs_err_pid*
 # VSCode workspace
 .vscode
 *.code-workspace
+
+# misc
+*._*
