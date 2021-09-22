@@ -2,10 +2,10 @@
 
 ## Table of Contents
 
-1. [Getting Started](#1.-getting-started)
-2. [Variables](#2.-variables)
-3. [Booleans and Conditionals](#3.-booleans-and-conditionals)
-4. [Functions](#4.-functions)
+1. [Getting Started](getting-started)
+2. [Variables](variables)
+3. [Booleans and Conditionals](#booleans-and-conditionals)
+4. [Functions](#functions)
 5. [Loops](#loops)
 6. [Arrays](#arrays)
 
@@ -14,7 +14,7 @@
 - [Good Coding Habits](#good-coding-habits)
 - [Tips and Tricks](#tips-and-tricks)
 
-## 1. Getting Started
+## Getting Started
 
 This cheat sheet contains the most important takeaways that lead up to section one.
 
@@ -23,7 +23,7 @@ This cheat sheet contains the most important takeaways that lead up to section o
 - `javac <FileName>.java`: compiles your code
 - `java <FileName>`: runs the compiled code
 
-## 2. Variables
+## Variables
 ### Data Types
 There are 6 main data types
 
@@ -61,7 +61,7 @@ Put math operations in brackets if you wish to embed them inside a `String`.
 
 - Example: `"5 + 2 is " + (5 + 2);`
 
-## 3. Booleans and Conditionals
+## Booleans and Conditionals
 ### Comparison Operators
 
 | Comparison | Comparison Name |
@@ -79,7 +79,7 @@ Put comparison operations in brackets if you wish to embed them inside a `String
 
 - Example: `"Five is not smaller than one. I'm certain this is " + (5 < 1);`
 
-## 4. Functions
+## Functions
 ### Function Parts
 
 1. **Level of access**: `private`, `public`.
@@ -91,15 +91,15 @@ Put comparison operations in brackets if you wish to embed them inside a `String
 
 - `return` breaks the entire function. Nothing after it can run.
 
-## 5. Loops
+## Loops
 - Use `for` loops when you know in advance how many times your code should run.
 - Use `while` loops to keep running code while a condition is `true`.
 
 `break`: breaks a loop and stops it from running.
 `continue`: skips the current run, and continues the next one.
 
-## 6. Arrays
-### 6.1. Defining an array
+## Arrays
+### Defining an array
 You can define an array and its values in one line.
 
 ```java
@@ -118,12 +118,12 @@ In both cases:
  - The variable does not store the array directly.
  - It stores a **reference** that points to it.
 
-### 6.2. Accessing values from an array
+### Accessing values from an array
 You can access values from an array by referring to its index, such that:
 
  - The first index is 0.
  - The last index is one less than the length of the array.
-### 6.3. Looping an array
+### Looping an array
 
 ```java
 for (int i = 0; i < array.length; i++) {
@@ -131,7 +131,7 @@ for (int i = 0; i < array.length; i++) {
 }
 ```
 
-### 6.4. Reference Trap
+### Reference Trap
 
 |||
 |:--:|:--:|
@@ -140,7 +140,7 @@ for (int i = 0; i < array.length; i++) {
 | <span style="color:white; background-color:black;">Solution</span> | Set it equal to a copy of the array (```Arrays.copyOf```). |
 |||
 
-### 6.5. Defining a 2D array
+### Defining a 2D array
 Method 1:
 
 ```java
@@ -159,11 +159,11 @@ array[0][1] = element2;
 array[1][0] = element3;
 array[1][1] = element4;
 ```
-### 6.6. Accessing values from a 2D array
+### Accessing values from a 2D array
  - The first bracket indexes the row.
  - The second bracket indexes teh element in that row.
 
-### 6.7. Looping a 2D array
+### Looping a 2D array
 ```java
 for(int i = 0; i < array.length; i++) {
 	for(int j = 0; j < array[i].length; j++) {
