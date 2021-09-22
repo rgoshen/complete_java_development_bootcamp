@@ -5,7 +5,8 @@ public class TicTacToe {
     static Scanner scan = new Scanner(System.in);
     public static void main(String[] args) {
 
-      System.out.println("\nLet's play tic tac toe");
+      System.out.println("\nLet's play tic tac toe. Press enter to start.");
+      scan.nextLine();
 
             char[][] board = {
                 { '_', '_', '_' },
@@ -49,14 +50,17 @@ public class TicTacToe {
      * @param board (char[][])
      *
      * Inside the function:
-     *   1. print a new line.
-     *   2. print the board.
+     *   1. clears the screen.
+     *   2. print a new line.
+     *   3. print the board.
      *      • separate each row by two lines.
      *      • each row precedes a tab of space
      *      • each character in the grid has one space from the other character
      */
 
      public static void printBoard(char[][] board) {
+       System.out.println("\033[H\033[2J"); // clears the screen
+       System.out.flush();
        System.out.print("\n");
        for (int i = 0; i < board.length; i++) {
          System.out.print("\t");
