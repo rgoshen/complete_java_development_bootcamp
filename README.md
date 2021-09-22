@@ -2,10 +2,10 @@
 
 ## Table of Contents
 
-1. [Getting Started](#getting-started)
-2. [Variables](#-variables)
-3. [Booleans and Conditionals](#booleans-and-conditionals)
-4. [Functions](#functions)
+1. [Getting Started](#1.-getting-started)
+2. [Variables](#2.-variables)
+3. [Booleans and Conditionals](#3.-booleans-and-conditionals)
+4. [Functions](#4.-functions)
 5. [Loops](#loops)
 6. [Arrays](#arrays)
 
