@@ -85,10 +85,7 @@ public class Hangman {
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        char[] guesses = new char[26];
-        char[] missed = new char[6];
-        int incorrectGuesses = 0;
-        int nextIndex = 0;
+        boolean isPlay = true;
 
         // user start game
         System.out.println("Welcome to Java Hangman.  Press 'e' to exit or 'b' to begin the game.");
@@ -99,63 +96,77 @@ public class Hangman {
             System.exit(0);
         }
 
-        option = ' ';   //reset option
+        while (isPlay) {
 
-        // generate random word and place holders
-        String answer = randomWord(words);
-        char[] placeHolders = new char[answer.length()];
-        for (int i = 0; i < placeHolders.length; i++) {
-            placeHolders[i] = '_';
-        };
+            char[] guesses = new char[26];
+            char[] missed = new char[6];
+            int incorrectGuesses = 0;
+            int nextIndex = 0;
+            option = ' '; //reset option
 
-        System.out.println(answer + "\n");
-
-        while (incorrectGuesses < 6) {
-            System.out.println("\033[H\033[2J"); // clears the screen
-            System.out.flush();
-            System.out.print("Guesses: ");
-            printCharArray(guesses);
-            System.out.println("\n");
-            System.out.println(gallows[incorrectGuesses]);
-            System.out.print("\nWord: ");
-            printPlaceHolders(placeHolders);
-            System.out.print("Misses: ");
-            printCharArray(missed);
-            System.out.println("\n");
-
-            System.out.print("Guess: ");
-            char guess = scan.nextLine().charAt(0);
-
-            // checks if already guessed letter
-
-            // add guess to next empty in guessed array
-            guesses[nextIndex] = guess;
-            nextIndex++;
-
-            if (checkGuess(answer, guess)) {
-                updatePlaceHolders(answer, placeHolders, guess);
-            } else {
-                missed[incorrectGuesses] = guess;
-                incorrectGuesses++;
+            // generate random word and place holders
+            String answer = randomWord(words);
+            char[] placeHolders = new char[answer.length()];
+            for (int i = 0; i < placeHolders.length; i++) {
+                placeHolders[i] = '_';
             }
+            ;
 
-            if (Arrays.equals(answer.toCharArray(), placeHolders)) {
+            System.out.println(answer + "\n");
+
+            while (incorrectGuesses < 6) {
                 System.out.println("\033[H\033[2J"); // clears the screen
                 System.out.flush();
+                System.out.print("Guesses: ");
+                printCharArray(guesses);
+                System.out.println("\n");
                 System.out.println(gallows[incorrectGuesses]);
                 System.out.print("\nWord: ");
                 printPlaceHolders(placeHolders);
-                System.out.println("AWESOME!!! You solved it.");
-                break;
+                System.out.print("Misses: ");
+                printCharArray(missed);
+                System.out.println("\n");
+
+                System.out.print("Guess: ");
+                char guess = scan.nextLine().charAt(0);
+
+                // checks if already guessed letter
+
+                // add guess to next empty in guessed array
+                guesses[nextIndex] = guess;
+                nextIndex++;
+
+                if (checkGuess(answer, guess)) {
+                    updatePlaceHolders(answer, placeHolders, guess);
+                } else {
+                    missed[incorrectGuesses] = guess;
+                    incorrectGuesses++;
+                }
+
+                if (Arrays.equals(answer.toCharArray(), placeHolders)) {
+                    System.out.println("\033[H\033[2J"); // clears the screen
+                    System.out.flush();
+                    System.out.println(gallows[incorrectGuesses]);
+                    System.out.print("\nWord: ");
+                    printPlaceHolders(placeHolders);
+                    System.out.println("AWESOME!!! You solved it.");
+                    break;
+                }
+
+                if (incorrectGuesses == 6) {
+                    System.out.println(gallows[gallows.length - 1]);
+                    System.out.println("R.I.P.!\n");
+                    System.out.println("The correct answer was: " + answer);
+                }
+
             }
 
-            if (incorrectGuesses == 6) {
-                System.out.println(gallows[gallows.length - 1]);
-                System.out.println("R.I.P.!\n");
-                System.out.println("The correct answer was: " + answer);
+            System.out.println("Would you like to play again? y or n?");
+            option = scan.nextLine().charAt(0);
+
+            if (option == 'n' || option == 'N') {
+                isPlay = false;
             }
-
-
         }
 
         System.out.println("\nThank you for playing.");
