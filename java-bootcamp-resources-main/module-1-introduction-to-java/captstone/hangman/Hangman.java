@@ -86,6 +86,8 @@ public class Hangman {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         boolean isPlay = true;
+        int solved = 0;
+        int rip = 0;
 
         // user start game
         System.out.println("Welcome to Java Hangman.  Press 'e' to exit or 'b' to begin the game.");
@@ -150,6 +152,7 @@ public class Hangman {
                     System.out.print("\nWord: ");
                     printPlaceHolders(placeHolders);
                     System.out.println("AWESOME!!! You solved it.");
+                    solved++;
                     break;
                 }
 
@@ -157,11 +160,12 @@ public class Hangman {
                     System.out.println(gallows[gallows.length - 1]);
                     System.out.println("R.I.P.!\n");
                     System.out.println("The correct answer was: " + answer);
+                    rip++;
                 }
 
             }
 
-            System.out.println("Would you like to play again? y or n?");
+            System.out.print("Would you like to play again? y or n? ");
             option = scan.nextLine().charAt(0);
 
             if (option == 'n' || option == 'N') {
@@ -170,6 +174,7 @@ public class Hangman {
         }
 
         System.out.println("\nThank you for playing.");
+        System.out.println("Solved: " + solved + " RIP: " + rip);
         scan.close();
     }
 
