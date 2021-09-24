@@ -85,14 +85,21 @@ public class Hangman {
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        char[] guessed = new char[26];
+        char[] guesses = new char[26];
         char[] missed = new char[6];
         int incorrectGuesses = 0;
         int nextIndex = 0;
 
         // user start game
-        System.out.println("Welcome to Java Hangman.  Press enter to begin the game.");
-        scan.nextLine();
+        System.out.println("Welcome to Java Hangman.  Press 'e' to exit or 'b' to begin the game.");
+        char option = scan.nextLine().charAt(0);
+
+        if (option == 'e' || option == 'E') {
+            System.out.println("exiting...");
+            System.exit(0);
+        }
+
+        option = ' ';   //reset option
 
         // generate random word and place holders
         String answer = randomWord(words);
@@ -106,8 +113,8 @@ public class Hangman {
         while (incorrectGuesses < 6) {
             System.out.println("\033[H\033[2J"); // clears the screen
             System.out.flush();
-            System.out.print("Guessed: ");
-            printCharArray(guessed);
+            System.out.print("Guesses: ");
+            printCharArray(guesses);
             System.out.println("\n");
             System.out.println(gallows[incorrectGuesses]);
             System.out.print("\nWord: ");
@@ -119,8 +126,10 @@ public class Hangman {
             System.out.print("Guess: ");
             char guess = scan.nextLine().charAt(0);
 
+            // checks if already guessed letter
+
             // add guess to next empty in guessed array
-            guessed[nextIndex] = guess;
+            guesses[nextIndex] = guess;
             nextIndex++;
 
             if (checkGuess(answer, guess)) {
@@ -139,7 +148,7 @@ public class Hangman {
                 System.out.println("AWESOME!!! You solved it.");
                 break;
             }
-            
+
             if (incorrectGuesses == 6) {
                 System.out.println(gallows[gallows.length - 1]);
                 System.out.println("R.I.P.!\n");
@@ -152,7 +161,7 @@ public class Hangman {
         System.out.println("\nThank you for playing.");
         scan.close();
     }
-    
+
     /**
      * Function name: randomWord
      * @param words (String[])
@@ -162,7 +171,6 @@ public class Hangman {
      *  1. generates a random number from 0 to words array length
      *  2. uses generated number as index for words array
      */
-
     public static String randomWord(String[] words) {
         double index = Math.random() * words.length;
         String word = words[(int) index];
@@ -177,7 +185,6 @@ public class Hangman {
      *  1. loop through char[] print a space before each element on
      *      same line
      */
-
     public static void printPlaceHolders(char[] placeHolders) {
         for (int i = 0; i < placeHolders.length; i++) {
             System.out.print(" " + placeHolders[i]);
@@ -210,7 +217,6 @@ public class Hangman {
      *  1. checks guess against every letter in word
      *     to see if it exists
      */
-
     public static boolean checkGuess(String word, char guess) {
         for (int i = 0; i < word.length(); i++) {
             if (word.charAt(i) == guess) {
