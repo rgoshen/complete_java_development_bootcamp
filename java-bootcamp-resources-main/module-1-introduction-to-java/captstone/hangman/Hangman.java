@@ -1,17 +1,3 @@
-/**
- * * Problem: build a hangman game that generates a random word from an array.
- *  ! Requirements:
- * *  1. User needs to be able to guess one letter at a time.
- * *  2. game needs to keep track of the guess
- * *  3. game needs to see answer contains guessed letter
- * *  4. if not, add to missed and updated gallows picture
- * *  5. if yes, then place in appropriate blank
- * *  6. only allow user to miss 6 before ending the game
- * *  7. only allow the user to select letters that have not been selected before
- * *  8. determine if user won by seeing if word is filled in prior to 6 misses
- * 
- */
-
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -133,6 +119,11 @@ public class Hangman {
                 char guess = scan.nextLine().charAt(0);
 
                 // checks if already guessed letter
+                while(checkGuesses(guesses, guess)){
+                    System.out.println("You already guessed that.  Please try again.");
+                    System.out.print("Guess: ");
+                    guess = scan.nextLine().charAt(0);
+                }
 
                 // add guess to next empty in guessed array
                 guesses[nextIndex] = guess;
@@ -243,12 +234,42 @@ public class Hangman {
         return false;
     }
 
+    /**
+     * Function name: updatePlaceHolders
+     * @param word (string)
+     * @param placeHolders (char[])
+     * @param guess (char)
+     * 
+     * Inside the function:
+     *  1. compares guess against word
+     *  2. if match, replaces '_' at same index in placeHolders
+     */
     public static void updatePlaceHolders(String word, char[] placeHolders, char guess) {
         for (int i = 0; i < word.length(); i++) {
             if (word.charAt(i) == guess) {
                 placeHolders[i] = guess;
+            }
+        };
+    }
+
+    /**
+     * Function name: checkGuesses
+     * @param word (String)
+     * @param guess (char)
+     * @return (boolean)
+     * 
+     * Inside the function:
+     *  1. checks guess against every letter in char arr
+     *     to see if it exists
+     */
+    public static boolean checkGuesses(char[] arr, char guess) {
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == guess) {
+                return true;
              }
         };
+
+        return false;
     }
 
 }
