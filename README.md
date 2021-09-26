@@ -1,4 +1,5 @@
 # Cheat Sheet
+This cheat sheet contains the most important takeaways that lead up to section one.
 
 ## Table of Contents
 
@@ -8,6 +9,7 @@
 4. [Functions](#functions)
 5. [Loops](#loops)
 6. [Arrays](#arrays)
+7. [The World of Objects](#the-world-of-objects)
 
 - [Scanner](#scanner)
 - [Rules of thumb](#rules-of-thumb)
@@ -15,8 +17,6 @@
 - [Tips and Tricks](#tips-and-tricks)
 
 ## Getting Started
-
-This cheat sheet contains the most important takeaways that lead up to section one.
 
 - `class`: contain all your code
 - `main()`: entry point of your app
@@ -172,6 +172,76 @@ for(int i = 0; i < array.length; i++) {
 }
 ```
 
+## The World of Objects
+### Definitions
+- **Class**: blueprint from which you can create objects.
+- **Object**: an object in a *thing* that you can see or describe.
+- **Field**: class variable that describes an object.
+- **Action**: method (function) that represents what the object can do.
+- **Constructor**: runs when you create a `new` object.
+	- Purpose: update every field of the newly created object.
+- **this**: refers to teh current object that's calling the constructor or method.
+	- Purpose: useful when fields and parameters have conflicting names.
+- **Copy Constructor**: runs when you create an object.
+	- Purpose: copy every value from a `source` object into a `new` object
+- **Getter**: method (function) that returns a copy of a `private` field's value.
+- **Setter**: method that updates the value of a `private` field.
+- **toString**: method that returns a `String` representation of every field in an object.
+	- Purpose: when you print an object, Java internally call the `toString` method.
+
+### `publc` **VS.** `private`
+- `public`: provides public access to a field or method from anywhere.
+	- Constructors and methods tend to be `public`.
+- `private`: prevents direct access of a field or method outside of the class.
+	- To protect the state of an object, fields tend to be `private`.
+
+### The Big Three
+If a `class` has fields, you need to add:
+
+1. **Constructor** -- to update the fields of a `new` object.
+2. **Getters** -- to get the value of a `private` field.
+3. **Setters** -- to set the value of a `private` field.
+
+### Reference Traps
+```java
+The state of a variable should not change because you updated another.
+```
+|||
+|:--:|:--:|
+| <span style="color:white; background-color:black;">Trap</span> | Setting an array equal to another. |
+| <span style="color:white; background-color:black;">Pitfall</span> | Both variables share a reference to the same array. |
+| <span style="color:white; background-color:black;">Solution</span> | Set it equal to a copy of the array (Arrays.copyOf). |
+|||
+| <span style="color:white; background-color:black;">Trap 2 </span> | Setting an object variable equal to another. |
+| <span style="color:white; background-color:black;">Pitfall</span> | Both variables share a reference to the same object. |
+| <span style="color:white; background-color:black;">Solution</span> | Create a new copy of the object (copy constructor). |
+|||
+| <span style="color:white; background-color:black;">Trap 3</span> | Getter returns an array field directly. |
+| <span style="color:white; background-color:black;">Pitfall</span> | The outside variable and field share a reference to the same array. |
+| <span style="color:white; background-color:black;">Solution</span> | Set it equal to a copy of the array (Arrays.copyOf). |
+|||
+| <span style="color:white; background-color:black;">Trap 4</span> | Getter returns a object directly. |
+| <span style="color:white; background-color:black;">Pitfall</span> | The outside variable and field share a reference to the same object. |
+| <span style="color:white; background-color:black;">Solution</span> | Return a new copyof the object. |
+|||
+
+Falling into a reference trap can:
+
+1. lead to unpredictable behavior.
+2. lead to variables changing when you don't expect them to.
+3. leave you wondering: *why is my coding doing this?*
+
+### Primative vs. Class Types
+
+| <span style="color:white; background-color:black;">Primative Type</span> | <span style="color:white; background-color:black;">Class Type</span> |
+| :---: | :---: |
+| Stores a value | Stores a reference |
+| Cannot be null | Can be null |   
+| Has no methods | Has methods |
+
+Examples of primatives types are `int`, `long`, `char`, and `boolean`.
+Examples of class types that we created objects from are: `Scanner`, `Dealership`, `Car`.
+
 ### Scanner
 
 | Method | Skips delimiter? | Returns |
@@ -231,6 +301,13 @@ If a function calculates a value, return it.
 - Use `Ctrl/control` + `c` to interrupt the terminal output.
 - Highlight and press `tab` for right indentation.
 - Highlight and press `shift` + `tab` for left indentation.
+
+#### OOP
+
+- Syntax to directly pass an array into a method: `new String[] { element, element }`
+- Syntax to directly return an array: `return new String[] { element, element }`
+- You can autocomplete getters adn setters in Visual Studio Code.
+![](https://firebasestorage.googleapis.com/v0/b/learnthepart-75aed.appspot.com/o/images%2Fc2195e80-49e4-4d1d-9662-3c838f89b5f1?alt=media&token=0bcb836d-0d2a-4ef0-bb7c-219904911328)
 
 #### Arrays
 
