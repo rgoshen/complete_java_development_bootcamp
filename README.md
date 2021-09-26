@@ -302,6 +302,14 @@ If a function calculates a value, return it.
 - Highlight and press `tab` for right indentation.
 - Highlight and press `shift` + `tab` for left indentation.
 
+#### Arrays
+
+- return an array on the fly using:
+
+```java
+return Type[] { element1, element2 };
+```
+
 #### OOP
 
 - Syntax to directly pass an array into a method: `new String[] { element, element }`
@@ -309,12 +317,5 @@ If a function calculates a value, return it.
 - You can autocomplete getters adn setters in Visual Studio Code.
 ![](https://firebasestorage.googleapis.com/v0/b/learnthepart-75aed.appspot.com/o/images%2Fc2195e80-49e4-4d1d-9662-3c838f89b5f1?alt=media&token=0bcb836d-0d2a-4ef0-bb7c-219904911328)
 
-#### Arrays
-
-- return an array on teh fly using:
-
-```java
-return Type[] { element1, element2 };
-```
 
 
