@@ -10,17 +10,29 @@ public class Machine {
             }
         }
     }
-    
+
     public Item getItem(int row, int spot) {
         return new Item(this.items[row][spot]);
     }
-    
+
     public void setItem(Item item, int row, int spot) {
         this.items[row][spot] = new Item(item);
     }
 
     public void dispense(int row, int spot) {
+        if (items[row][spot].getQuantity() == 0) {
+            throw new IllegalArgumentException("cannot dispense an item with quantity: 0");
+        }
+
         items[row][spot].setQuantity(items[row][spot].getQuantity() - 1);
+    }
+
+    public int getLength() {
+        return this.items.length;
+    }
+
+    public int getRowLength() {
+        return this.items[0].length;
     }
 
     public String toString() {

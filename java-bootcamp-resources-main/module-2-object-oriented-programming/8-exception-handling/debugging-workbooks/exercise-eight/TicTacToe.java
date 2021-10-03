@@ -5,16 +5,16 @@ public class TicTacToe {
             {'_', '_', '_'},
             {'_', '_', '_'}
         };
-        
+
         for (int i = 0; i < array.length; i++) {
-               array[i][2-i] = 'O';
-               array[2-i][2-i] = 'X';
+            array[2-i][2-i] = 'X';
+            array[i][2-i] = 'O';
         }
 
         printArray(array);
         System.out.println("\nO WINS!\n");
    }
-   
+
    public static void printArray(char[][] array) {
        System.out.println();
        for (int i = 0; i < array.length; i++) {

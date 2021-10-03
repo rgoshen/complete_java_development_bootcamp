@@ -10,6 +10,7 @@ This cheat sheet contains the most important takeaways that lead up to section o
 5. [Loops](#loops)
 6. [Arrays](#arrays)
 7. [The World of Objects](#the-world-of-objects)
+8. [Exception Handling and Debugging](#exception-handling-and-debugging)
 
 - [Scanner](#scanner)
 - [Rules of thumb](#rules-of-thumb)
@@ -180,13 +181,13 @@ for(int i = 0; i < array.length; i++) {
 - **Action**: method (function) that represents what the object can do.
 - **Constructor**: runs when you create a `new` object.
 	- Purpose: update every field of the newly created object.
-- **this**: refers to teh current object that's calling the constructor or method.
+- **`this`**: refers to teh current object that's calling the constructor or method.
 	- Purpose: useful when fields and parameters have conflicting names.
 - **Copy Constructor**: runs when you create an object.
 	- Purpose: copy every value from a `source` object into a `new` object
 - **Getter**: method (function) that returns a copy of a `private` field's value.
 - **Setter**: method that updates the value of a `private` field.
-- **toString**: method that returns a `String` representation of every field in an object.
+- **`toString`**: method that returns a `String` representation of every field in an object.
 	- Purpose: when you print an object, Java internally call the `toString` method.
 
 ### `publc` **VS.** `private`
@@ -241,6 +242,94 @@ Falling into a reference trap can:
 
 Examples of primatives types are `int`, `long`, `char`, and `boolean`.
 Examples of class types that we created objects from are: `Scanner`, `Dealership`, `Car`.
+
+## Exception Handling and Debugging
+### Debugging
+![](https://firebasestorage.googleapis.com/v0/b/learnthepart-75aed.appspot.com/o/images%2Fba457400-93c8-4508-b14c-7b92f4a54a46?alt=media&token=bbdd983c-2102-47c9-aa73-d8d9dddcae72)
+
+1. **Continue**: continues to the next breakpoint.
+2. **Step over**: steps over a line.
+3. **Step into**: steps into a function/cons.
+4. **Step out**: steps out of a function/cons.
+5. **Restart**: restarts the runtime.
+6. **Stop**: stops the runtime.
+
+### Exceptions
+#### Checked:
+- Compile-time.
+- Outside the application's control.
+- Java forces you to `try-catch` the potential failure.
+
+#### Unchecked:
+- Runtime.
+- Results from badly written code.
+- Do not catch unchecked exceptions. Instead, fix your code.
+
+#### Throwing Exceptions
+- Forces the caller to improve their code.
+- Throw an `IllegalArgumentException` if the caller passes illegal values into a method/constructor.
+- Throw an `IllegalStateException` if the caller invokes a method at a bad time (object not in a valid state).
+
+### Mutable/Immutable Object
+- **Mutable class**: class with accessable mutators (setters).
+- **Immutable class**: class without accessable mutators (setters).
+
+| <span style="color:white; background-color:black;"></span> | <span style="color:white; background-color:black;">Primitive Type</span> | <span style="color:white; background-color:black;">Mutable Object</span> |<span style="color:white; background-color:black;">Immutable Object</span> |
+| :---: | :---: | :---: | :---: |
+| Stores | Value | Reference | Reference |
+| Nullable | No | Yes | Yes |   
+| Callable Methods | No | Yes | Yes |
+| Can Update State| N/A | Yes | No |
+|Reference Trap | N/A | Vulnerable | Immune |
+
+**Example 1:**
+
+```
+An array is a mutable object.
+```
+Every array is a **mutable** object of a `type[]` class.
+
+| <span style="color:white; background-color:blue;">primitive</span> | <span style="color:white; background-color:blue;">Array Class</span> |
+| :---: | :---: |
+| int | int[] |
+| double | double[] |   
+| long | long[] |
+| char | char[] |
+It follows that arrays are vulnerable to the reference trap.
+
+**Example 2:**
+
+```
+String is an immutable class.
+```
+It follows that objectsof the `String` class are immune to the reference trap.
+
+### Wrapper Class
+**Wrapper**: Immutable class that wraps around a primitive.
+
+| <span style="color:white; background-color:black;">Immutable Class</span> | <span style="color:white; background-color:black;">Primitive Type</span> |
+| :---: | :---: |
+| Integer | int |
+| Double | double |   
+| Long | long |
+| Character | char |
+| String | N/A |
+`String` is not a wrapper class. But, it is immutable.
+#### Rule:
+- Use primitive when possible (faster and less memory).
+- Use wrapper only when you need to (inside `ArrayList`...).
+
+#### `Array` VS. `ArrayList`
+- `Array`
+	- fixed
+	- stores primitives and objects
+	- `type[] values = new type[]`
+- `ArrayList`
+	- resizable
+	- stores objects
+	- `ArrayList<object> values = new ArrayList<object>();`
+
+**Rule:** use arrays when size is fixed (less overhead). Use `ArrayList` when size can vary.
 
 ### Scanner
 
@@ -309,6 +398,9 @@ If a function calculates a value, return it.
 ```java
 return Type[] { element1, element2 };
 ```
+#### Misc
+
+- Conditional ssignment syntax: `variable = (comparison)  ? value true : value false`.
 
 #### OOP
 

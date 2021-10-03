@@ -13,9 +13,9 @@ public class Car {
         this.price = price;
     }
 
-    public Car(Car source) { 
+    public Car(Car source) {
             this.make = source.make;
-            this.price = source.price;    
+            this.price = source.price;
     }
     public String getMake() {
         return this.make;
@@ -45,7 +45,7 @@ public class Car {
     }
 
     public String toString() {
-        return "\tMake: " + this.make + ".\n" 
+        return "\tMake: " + this.make + ".\n"
             +  "\tPrice: " + this.price + ".\n";
     }
 
