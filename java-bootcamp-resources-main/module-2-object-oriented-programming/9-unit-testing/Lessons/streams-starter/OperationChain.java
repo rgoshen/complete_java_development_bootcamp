@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class OperationChain {
 
@@ -12,8 +13,15 @@ public class OperationChain {
         prices.add(15.99);
 
         ArrayList<Double> updatePrices = new ArrayList<Double>();
-        filterLowPrices(updatePrices);
-        tax(updatePrices);
+
+        updatePrices.addAll(
+                prices.stream()
+                    .filter((price) -> price < 5)
+                    .map((price) -> price * 1.13)
+                    .collect(Collectors.toList()));
+
+        // filterLowPrices(updatePrices);
+        // tax(updatePrices);
 
     }
     
