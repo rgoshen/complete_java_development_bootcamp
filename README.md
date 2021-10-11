@@ -11,6 +11,7 @@ This cheat sheet contains the most important takeaways that lead up to section o
 6. [Arrays](#arrays)
 7. [The World of Objects](#the-world-of-objects)
 8. [Exception Handling and Debugging](#exception-handling-and-debugging)
+9. [Unit Testing](#unit-testing)
 
 - [Scanner](#scanner)
 - [Rules of thumb](#rules-of-thumb)
@@ -319,7 +320,7 @@ It follows that objectsof the `String` class are immune to the reference trap.
 - Use primitive when possible (faster and less memory).
 - Use wrapper only when you need to (inside `ArrayList`...).
 
-#### `Array` VS. `ArrayList`
+#### `Array` VS. `ArrayList` VS. `HashMap`
 - `Array`
 	- fixed
 	- stores primitives and objects
@@ -328,8 +329,61 @@ It follows that objectsof the `String` class are immune to the reference trap.
 	- resizable
 	- stores objects
 	- `ArrayList<object> values = new ArrayList<object>();`
+- `HashMap`
+	- resizable
+	- stores key-value pairs
+	- `HashMap<Object, Object> pairs = new HashMap<Object, Object>()` 
 
-**Rule:** use arrays when size is fixed (less overhead). Use `ArrayList` when size can vary.
+**Rule:** use arrays when size is fixed (less overhead). Use `ArrayList` when size can vary. Use `HashMap` when there is parity between data.
+
+## Unit Testing
+### Test-Driven Development
+1. Identify meaningful test cases.
+2. Write a unit test for each test fail.
+	- Write code to make the test fail.
+	- Write code to make the test pass.
+	- Refactor if necessary.
+
+`@Test` annotates a unit test. `@Before` annotates a method that runs before each test.
+
+### Stream Pipeline
+Instead fo loops, you should pass elements into a pipeline:
+
+```java
+collection.stream()
+		.intermediateOperation(lambda expression)
+		.intermediateOperation(lambda expression)
+		.intermediateOperation(lambda expression)
+		.intermediateOperation(lambda expression)
+		.terminalOperation(lambda expression)
+```
+**Intermediate operation:** processes the sequence of elements and continues the pipeline.
+**Terminal operation:** ends the pipeline and may return a final value.
+**Lambda expression syntax:**
+
+```java
+((parameter) -> {
+	code goes here
+})
+```
+### `equals()` method
+
+```java
+public boolean equals(Object obj){
+	return false if parameter is null.
+	return false if parameter isn't instance of class.
+	typecast the object.
+	compare fields from both objects and return the result.
+}
+```
+### `hasCode()` method
+When you add an `equals()` method, you must **always** add a `hashCode()` method.
+
+```java
+public int hashCode(){
+	return Objects.hash(fields go here);
+}
+```
 
 ### Scanner
 
@@ -365,11 +419,16 @@ Do not confuse `=` with `==`
 If a function calculates a value, return it.
 
 ### Good Coding Habits
-#### Conventions
+#### Naming Conventions
 
-- class: `CamelCase`.
-- variable: `lowerCamelCase`.
-- function: `lowerCamelCase`.
+- class: `CamelCase`
+- variable: `lowerCamelCase`
+- method: `lowerCamelCase`
+- constant: `UPPER_SNAKE_CASE`
+
+#### `static` and `final`
+- `static`: variable or method belongs to the class.
+- `final`: cannot be updated.
 
 ### Tips and Tricks
 #### Terminal
@@ -400,7 +459,7 @@ return Type[] { element1, element2 };
 ```
 #### Misc
 
-- Conditional ssignment syntax: `variable = (comparison)  ? value true : value false`.
+- Conditional assignment syntax: `variable = (comparison)  ? value true : value false`.
 
 #### OOP
 
