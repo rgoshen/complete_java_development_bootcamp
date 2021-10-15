@@ -15,51 +15,45 @@ public class Person {
         this.age = source.age;
     }
 
-
     public String getName() {
-        return this.name;
+        return name;
+    }
+
+    public int getAge() {
+        return age;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public int getAge() {
-        return this.age;
-    }
-
     public void setAge(int age) {
         this.age = age;
     }
-    
 
     @Override
-    public boolean equals(Object o) {
-        if (o == this) {
-            return true;
-        }
-
-        if (!(o instanceof Person)) {
+    public boolean equals(Object obj) {
+        if (obj == null) {
             return false;
         }
-        
-        Person person = (Person) o;
-        return Objects.equals(name, person.name) && age == person.age;
+
+        if (!(obj instanceof Person)) {
+            return false;
+        }
+
+        Person person = (Person) obj;
+
+        return this.name.equals(person.getName()) && this.age == person.getAge();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, age);
+        return Objects.hash(this.age, this.name);
     }
 
     @Override
     public String toString() {
-        return "{" +
-            " name='" + getName() + "'" +
-            ", age='" + getAge() + "'" +
-            "}";
+        return "Name: " + this.name + " age: " + this.age;
     }
-
-
 
 }
