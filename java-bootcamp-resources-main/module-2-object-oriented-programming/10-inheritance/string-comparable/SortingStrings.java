@@ -4,5 +4,6 @@ public class SortingStrings {
         String amy = "Amy";
         String jane = "Jane";
         
+        System.out.println(john.compareTo(jane));
     }
 }
