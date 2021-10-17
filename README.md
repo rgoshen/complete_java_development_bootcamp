@@ -1,5 +1,5 @@
 # Cheat Sheet
-This cheat sheet contains the most important takeaways that lead up to section one.
+This cheat sheet contains the most important takeaways that lead up to section ten.
 
 ## Table of Contents
 
@@ -12,6 +12,7 @@ This cheat sheet contains the most important takeaways that lead up to section o
 7. [The World of Objects](#the-world-of-objects)
 8. [Exception Handling and Debugging](#exception-handling-and-debugging)
 9. [Unit Testing](#unit-testing)
+10. [Inheritance](#inheritance)
 
 - [Scanner](#scanner)
 - [Rules of thumb](#rules-of-thumb)
@@ -336,6 +337,14 @@ It follows that objectsof the `String` class are immune to the reference trap.
 
 **Rule:** use arrays when size is fixed (less overhead). Use `ArrayList` when size can vary. Use `HashMap` when there is parity between data.
 
+#### `HashMap` VS. `TreeMap` VS. `LinkedHashMap`
+- `HashMap`
+	- Unordered entries.
+- `TreeMap`
+	- Entries ordered based on what you specify.
+- `LinkedHashMap`
+	- Entries ordered based on insertion.
+
 ## Unit Testing
 ### Test-Driven Development
 1. Identify meaningful test cases.
@@ -376,7 +385,7 @@ public boolean equals(Object obj){
 	compare fields from both objects and return the result.
 }
 ```
-### `hasCode()` method
+### `hashCode()` method
 When you add an `equals()` method, you must **always** add a `hashCode()` method.
 
 ```java
@@ -384,6 +393,20 @@ public int hashCode(){
 	return Objects.hash(fields go here);
 }
 ```
+
+## Inheritance
+- Classes that share common fields should inherit from a parent class.
+- Use `super()` to call the parent constructor from the child class.
+- Use `super.method` to call a parent method from the child class.
+- **Interface:** contract of behaviour. Classes that implement an interface must override every method inside of it.
+- **Polymorphism:**
+	- an object can take its form or the class it inherits from.
+	- an object can take its form or the interface it implements.
+- **`abstract` class:** Parent class that provides inheritance. The caller is forbidden from creating objects of an `abstract` class.
+- **`abstract` method:** a child **must** override every `abstract` method.
+
+### Enums
+Use an `enum` to ensure a variable can only be a limited number of values.
 
 ### Scanner
 
@@ -460,6 +483,7 @@ return Type[] { element1, element2 };
 #### Misc
 
 - Conditional assignment syntax: `variable = (comparison)  ? value true : value false`.
+- Use the **Java Code Generators** extension to autogenerate `getters`, `seters`, `equals()`, `hashCode()`, and `toString()`.
 
 #### OOP
 
