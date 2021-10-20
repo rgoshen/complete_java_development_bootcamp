@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.concurrent.Callable;
+import java.util.concurrent.FutureTask;
 
 public class Main {
 
@@ -9,18 +11,24 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Runnable runnable = () -> result = generateNumber();
-        Thread thread = new Thread(runnable);
+        // Runnable runnable = () -> result = generateNumber();
+        // Thread thread = new Thread(runnable);
+        Callable<Double> callable = () -> generateNumber();
+        FutureTask<Double> future = new FutureTask<>(callable);
+        Thread thread = new Thread(future);
+
         thread.start();
         
-        // Scanner scan = new Scanner(System.in);
-        // System.out.print("Please enter in a name to generate a number: ");
-        // scan.nextLine();
-        // scan.close();
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Please enter in a name to generate a number: ");
+        scan.nextLine();
+        scan.close();
         
         try {
-            thread.join();
-        } catch (InterruptedException e) {
+            // thread.join();
+            result = future.get();
+        // } catch (InterruptedException e) {
+        } catch (Exception e) {
             System.err.println(e.getMessage());
         }
         
