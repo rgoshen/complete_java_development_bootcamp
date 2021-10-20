@@ -11,18 +11,18 @@ public class Main {
     static final String SALES = "data/sales.csv"; //Use backslash Windows users
 
     public static void main(String[] args) {
-        
+
         try {
             Path path = Paths.get(Thread.currentThread().getContextClassLoader().getResource(SALES).toURI());
             //calculate average sales of "Furniture" here
             Thread thread2 = new Thread(() -> average(path, "Furniture"));
-            
+
             //calculate average sales of "Technology" here
             Thread thread3 = new Thread(() -> average(path, "Technology"));
 
             //calculate average sales of "Office Supplies" here
             Thread thread4 = new Thread(() -> average(path, "Office Supplies"));
-            
+
             //calculate total average of sales here
             Thread thread5 = new Thread(() -> totalAverage(path));
 
