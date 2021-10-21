@@ -7,7 +7,7 @@ import java.util.Scanner;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.ReentrantLock;
 
 import javax.xml.crypto.URIReferenceException;
 
@@ -15,8 +15,8 @@ public class Main {
 
     static String[] files = new String[] { "data/sales1.csv", "data/sales2.csv", "data/sales3.csv"};
 
-    static AtomicInteger sampleSize = new AtomicInteger(0);
-    static AtomicInteger quantitySold = new AtomicInteger(0);
+    static int sampleSize = 0;
+    static int quantitySold = 0;
 
 
     public static void main(String[] args) throws Exception {
@@ -24,9 +24,10 @@ public class Main {
         // execute tasks here
         int nThreads = 3;
         CountDownLatch latch = new CountDownLatch(nThreads);
+        ReentrantLock lock = new ReentrantLock();
         ExecutorService executor = Executors.newFixedThreadPool(nThreads);
         for (String file : files) {
-            executor.submit(() -> increment(file, latch));
+            executor.submit(() -> increment(file, latch, lock));
         }
 
         Scanner scan = new Scanner(System.in);
@@ -52,7 +53,7 @@ public class Main {
      *   2. Maps each element in the stream to a quantity value.
      *   3. Increments sampleSize and quantitySold.
      */
-    public static void increment(String file, CountDownLatch latch) {
+    public static void increment(String file, CountDownLatch latch, ReentrantLock lock) {
         try {
             Path path = Paths.get(Thread.currentThread().getContextClassLoader().getResource(file).toURI());
 
@@ -60,8 +61,10 @@ public class Main {
                 .skip(1)
                 .mapToInt((line) -> Integer.parseInt(line.split(",")[2]))
                 .forEach((quantity) -> {
-                    sampleSize.addAndGet(1);
-                    quantitySold.addAndGet(quantity);
+                    lock.lock();
+                    sampleSize++;
+                    quantitySold += quantity;
+                    lock.unlock();
                 });
         } catch (URISyntaxException e) {
             System.err.println(e.getMessage());
