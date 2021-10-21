@@ -21,7 +21,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        int nThreads = 4;
+        int nThreads = Runtime.getRuntime().availableProcessors();
 
         ExecutorService executor = Executors.newFixedThreadPool(nThreads);
         
