@@ -1,11 +1,11 @@
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class Main {
 
-    static AtomicInteger counter = new AtomicInteger(0);
+    static int counter = 0;
 
     public static void main(String[] args) {
 
@@ -14,8 +14,9 @@ public class Main {
         int nThreads = Runtime.getRuntime().availableProcessors();
         ExecutorService executor = Executors.newFixedThreadPool(nThreads);
         CountDownLatch latch = new CountDownLatch(tries);
+        ReentrantLock lock = new ReentrantLock();
         for (int i = 0; i < tries; i++) {
-            executor.submit(() -> task(latch));
+            executor.submit(() -> task(lock, latch));
         }
 
         try {
@@ -29,10 +30,12 @@ public class Main {
         System.out.println(counter);
     }
 
-    public static void task(CountDownLatch latch) {
+    public static void task(ReentrantLock lock, CountDownLatch latch) {
         //some really long operations that need to run in the background...
         for (int i = 0; i < 10000; i++) {
-            counter.addAndGet(1);// there happens to be a line that updates the counter variable.
+            lock.lock();
+            counter++; // there happens to be a line that updates the counter variable.
+            lock.unlock();
         }
         latch.countDown();
         //more really long operations...
